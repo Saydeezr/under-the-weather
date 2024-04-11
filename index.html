@@ -10,13 +10,17 @@
 
 <body>
   <div class="container">
-    <h1>Under The Weather</h1>
-        <input type="text" id="locationInput" placeholder="Enter a city">
-        <button id="searchBtn">Search</button>
-     <div class="weatherInfo">
+    <h1 class="fw-bold h2 my-1"> Under The Weather</h1>
+    <div class="row mb-3">
+      <input type="text" class="form-control" id="locationInput" placeholder="Enter a city">
+      <button type="submit" id="searchBtn">Search</button>
+    </div>
+    <div id="recents">
+      <p>Recent Searches</p>
+      <hr>
+    </div>
+    <div class="container-fluid my-4 weatherInfo">
         <h2 id="location"></h2>
-        <p id="temperature"></p>
-        <p id="description">show local weather</p>
     </div>
   </div>
 <script src="script.js"></script>
