@@ -12,17 +12,22 @@
   <div class="container">
     <h1 class="fw-bold h2 my-1"> Under The Weather</h1>
     <div class="row mb-3">
-      <input type="text" class="form-control" id="locationInput" placeholder="Enter a city">
+      <input type="text" class="form-control" id="cityInput" placeholder="Enter a city">
       <button type="submit" id="searchBtn">Search</button>
     </div>
     <div id="recents">
       <p>Recent Searches</p>
       <hr>
     </div>
-    <div class="container-fluid my-4 weatherInfo">
-        <h2 id="location"></h2>
-    </div>
-  </div>
+ </div>
+ <div class="container-fluid header" id="weatherInfo">
+    <h2>Weekly Forecast</h2>
+    <hr>
+    <div id="cityName"></div>
+    <img id="weatherIcon" alt="weather icon">
+    <div id="temp"></div>
+    <div id="description"></div>
+ </div>
 <script src="script.js"></script>
 
     <!-- Second Attempt  -->
