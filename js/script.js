@@ -1,16 +1,15 @@
-
-const weatherApiKey = '223145bd460816c9dd292b66ab0ede9'
-// const input = document.getElementById('cityInput')
+const searchBtn = document.getElementById('searchBtn')
 
 
-submit.addEventListener('click',event => {
+searchBtn.addEventListener('click',event => {
     event.preventDefault();
+    console.log('this works');
     getWeather();
   
 })
 
 function getWeather () {
-    const weatherApiKey = '223145bd460816c9dd292b66ab0ede9'
+    const weatherApiKey = '7596004de5171a4718248356aeca333c' 
     const input = document.getElementById('cityInput').value;
 
     if(!input) {
@@ -18,13 +17,14 @@ function getWeather () {
         return;
     };
 
-    const weatherApiUrl = `api.openweathermap.org/data/2.5/weather?q=${city}&appid=${weatherApiKey}` 
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${weatherApiKey}`
+    const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}` 
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${weatherApiKey}`
        
     fetch(weatherApiUrl)
        .then(response => response.json())
        .then(data => {
-         getWeather(data);
+         //displayWeather(data);
+         console.log(data)
        })
        .catch(error => {
           alert('Error recieving current weather data. Please try again.')
@@ -33,7 +33,8 @@ function getWeather () {
     fetch(forecastUrl)
         .then(response => response.json())
         .then(data => {
-            displayHourlyForecast(data.list);
+            //displayHourlyForecast(data.list);
+            console.log(data)
         })
         .catch(error => {
             alert('Error receiving hourly forecast data. Please try again.');
