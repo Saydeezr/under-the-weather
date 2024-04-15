@@ -15,7 +15,7 @@ function getWeather () {
     if(!input) {
         alert('Please enter a city')
         return;
-    };
+    }
 
     const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}` 
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${weatherApiKey}`
@@ -42,7 +42,11 @@ function getWeather () {
 }
 
 function displayWeather(data) {
+    const temperature = data.main.temp;
+    const description = data.weather[0].description;
+    const cityName = data.name;
 
+    console.log(`Current weather in ${cityName}: ${temperature}°C, ${description}`);
 }
 
 
