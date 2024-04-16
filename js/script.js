@@ -16,7 +16,6 @@ function getCurrentWeather () {
         alert('Please enter a city')
         return;
     }
-
     fetch(weatherApiUrl)
        .then(response => response.json())
        .then(data => {
@@ -35,13 +34,13 @@ function getForecast(){
     fetch(forecastUrl)
         .then(response => response.json())
         .then(data => {
-            //displayHourlyForecast(data.list);
+            displayDailyForecast(data.list);
             console.log(data)
         })
         .catch(error => {
             alert('Error receiving hourly forecast data. Please try again.');
         });
-}
+};
 
 
 function displayCurrentWeather(data) {
@@ -49,8 +48,6 @@ function displayCurrentWeather(data) {
     const description = data.weather[0].description;
     const cityName = data.name;
     const body = document.querySelector('.header')
-    
-    console.log(`Current weather in ${cityName}: ${temperature}°C, ${description}`);
 
     const newContainer = document.createElement('div')
     newContainer.classList.add('forecast')
@@ -68,10 +65,39 @@ function displayCurrentWeather(data) {
     newContainer.appendChild(temp)
     newContainer.appendChild(additionalInfo)
     body.appendChild(newContainer);
+};
 
+
+
+function displayDailyForecast(forecastData){
+    const forecastContainer = document.querySelector('.subheader');
+    forecastContainer.innerHTML = '';
+
+    forecastData.forEach(day => {
+        const date = new Date(day.dt * 1000);
+        let iconCode = day.weather[0].icon;
+        let iconURL = `https://openweathermap.org/img/wn/${iconCode}@4x.png`
+        const temperature = day.main.temp;
+        const description = day.weather[0].description;
+
+        const newContainer = document.createElement('div');
+        newContainer.classList.add(`dailyforecast`);
+
+        const newDate = document.createElement('p');
+        newDate.innerHTML = date.toLocaleDateString();
+        newContainer.appendChild(newDate);
+
+        const newTemp = document.createElement('h1');
+        newTemp.innerHTML = `${temperature}°F`;
+        newContainer.appendChild(newTemp);
+
+        const conditions = document.createElement('h3');
+        conditions.innerHTML = description;
+        newContainer.appendChild(conditions);
+
+        forecastContainer.appendChild(newContainer);
+    })
 }
-
-
 
 
 
