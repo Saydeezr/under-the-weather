@@ -6,7 +6,18 @@ searchBtn.addEventListener('click',event => {
     event.preventDefault();
     getCurrentWeather();
     getForecast();
-})
+    
+    const input = document.getElementById('recents').value;
+    const inputString = JSON.stringify(input);
+    localStorage.setItem('recent', inputString);
+    console.log(input)
+    showRecents();
+});
+
+function showRecents(){
+    const storedItem = localStorage.getItem('recent')
+    console.log(storedItem)
+};
 
 function getCurrentWeather () {
     const input = document.getElementById('cityInput').value;
