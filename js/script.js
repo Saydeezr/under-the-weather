@@ -1,34 +1,36 @@
-const searchBtn = document.getElementById('searchBtn')
+const searchBtn = document.getElementById('searchBtn');
+const weatherApiKey = '223145bd460816c9dd292b66ab0ede94';
 
 
 searchBtn.addEventListener('click',event => {
     event.preventDefault();
-    console.log('this works');
-    getWeather();
-  
+    getCurrentWeather();
+    getForecast();
 })
 
-function getWeather () {
-    const weatherApiKey = '7596004de5171a4718248356aeca333c' 
+function getCurrentWeather () {
     const input = document.getElementById('cityInput').value;
-
+    const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}` 
+    
     if(!input) {
         alert('Please enter a city')
         return;
     }
 
-    const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}` 
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${weatherApiKey}`
-       
     fetch(weatherApiUrl)
        .then(response => response.json())
        .then(data => {
-         //displayWeather(data);
-         console.log(data)
+         displayCurrentWeather(data);
        })
        .catch(error => {
           alert('Error recieving current weather data. Please try again.')
        });
+    
+}
+
+function getForecast(){
+    const input = document.getElementById('cityInput').value;
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${weatherApiKey}`
 
     fetch(forecastUrl)
         .then(response => response.json())
@@ -41,7 +43,8 @@ function getWeather () {
         });
 }
 
-function displayWeather(data) {
+
+function displayCurrentWeather(data) {
     const temperature = data.main.temp;
     const description = data.weather[0].description;
     const cityName = data.name;
