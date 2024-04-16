@@ -73,8 +73,11 @@ function displayDailyForecast(forecastData){
     const forecastContainer = document.querySelector('.subheader');
     forecastContainer.innerHTML = '';
 
-    forecastData.forEach(day => {
+    for(let i=0;i<forecastData.length;i=i+8){
+        let day = forecastData[i]
+        console.log(day)
         const date = new Date(day.dt * 1000);
+        console.log(date)
         let iconCode = day.weather[0].icon;
         let iconURL = `https://openweathermap.org/img/wn/${iconCode}@4x.png`
         const temperature = Math.round(day.main.temp);
@@ -100,7 +103,7 @@ function displayDailyForecast(forecastData){
         newContainer.appendChild(conditions);
 
         forecastContainer.appendChild(newContainer);
-    })
+    }
 }
 
 
