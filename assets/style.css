@@ -18,7 +18,8 @@ body {
 }
 
 input[type="text"] {
-    width: 100%;
+    width: calc(100% - 100px);
+    float: left;
     padding: 10px;
     margin: 15px 0;
     margin-top: 20px;
@@ -27,17 +28,25 @@ input[type="text"] {
 }
 
 button {
+    width: 100px;
+    float: left;
     background-color: #3f311e;
     color: #fff;
     border: none;
-    padding: 10px 20px;
+    padding: 10px;
+    margin-top: 20px;
     border-radius: 5px;
     cursor: pointer;
 
 }
+.inputGroup {
+    overflow: hidden;
+    /* display: inline-block; 
+    margin-left: 10px; */
+}
 
 #recents {
-    padding-top: 25px;
+    padding-top: 5px;
 }
 
 .header {
@@ -47,4 +56,11 @@ button {
 
 .weather-info {
     margin-top: 10px;
+}
+
+.forecast {
+    background-color: rgba(255, 255, 255, 0.8); 
+    padding: 10px; 
+    border-radius: 5px; 
+    margin: 5px 0;
 }

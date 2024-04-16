@@ -48,7 +48,27 @@ function displayCurrentWeather(data) {
     const temperature = Math.round(data.main.temp);
     const description = data.weather[0].description;
     const cityName = data.name;
+    const body = document.querySelector('body')
+    
     console.log(`Current weather in ${cityName}: ${temperature}°C, ${description}`);
+
+    const newContainer = document.createElement('div')
+    newContainer.classList.add('forecast')
+
+    const city = document.createElement('h1');
+    city.innerHTML = cityName;
+
+    const temp = document.createElement('h2');
+    temp.innerHTML = `${temperature}°C`;
+
+    const additionalInfo = document.createElement('p');
+    additionalInfo.innerHTML = description;
+
+    newContainer.appendChild(city)
+    newContainer.appendChild(temp)
+    newContainer.appendChild(additionalInfo)
+    body.appendChild(newContainer);
+
 }
 
 
