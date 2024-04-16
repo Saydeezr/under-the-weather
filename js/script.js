@@ -10,7 +10,7 @@ searchBtn.addEventListener('click',event => {
 
 function getCurrentWeather () {
     const input = document.getElementById('cityInput').value;
-    const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}` 
+    const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}&units=imperial` 
     
     if(!input) {
         alert('Please enter a city')
@@ -30,7 +30,7 @@ function getCurrentWeather () {
 
 function getForecast(){
     const input = document.getElementById('cityInput').value;
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${weatherApiKey}`
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${weatherApiKey}&units=imperial`
 
     fetch(forecastUrl)
         .then(response => response.json())
@@ -45,10 +45,9 @@ function getForecast(){
 
 
 function displayCurrentWeather(data) {
-    const temperature = data.main.temp;
+    const temperature = Math.round(data.main.temp);
     const description = data.weather[0].description;
     const cityName = data.name;
-
     console.log(`Current weather in ${cityName}: ${temperature}°C, ${description}`);
 }
 
