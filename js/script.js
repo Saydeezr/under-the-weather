@@ -77,7 +77,7 @@ function displayDailyForecast(forecastData){
         const date = new Date(day.dt * 1000);
         let iconCode = day.weather[0].icon;
         let iconURL = `https://openweathermap.org/img/wn/${iconCode}@4x.png`
-        const temperature = day.main.temp;
+        const temperature = Math.round(day.main.temp);
         const description = day.weather[0].description;
 
         const newContainer = document.createElement('div');
@@ -86,6 +86,10 @@ function displayDailyForecast(forecastData){
         const newDate = document.createElement('p');
         newDate.innerHTML = date.toLocaleDateString();
         newContainer.appendChild(newDate);
+
+        const weatherIcon = document.createElement('img');
+        weatherIcon.src = iconURL;
+        newContainer.appendChild(weatherIcon);
 
         const newTemp = document.createElement('h1');
         newTemp.innerHTML = `${temperature}°F`;
