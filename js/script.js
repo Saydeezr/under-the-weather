@@ -48,7 +48,7 @@ function displayCurrentWeather(data) {
     const temperature = Math.round(data.main.temp);
     const description = data.weather[0].description;
     const cityName = data.name;
-    const body = document.querySelector('body')
+    const body = document.querySelector('.header')
     
     console.log(`Current weather in ${cityName}: ${temperature}°C, ${description}`);
 
@@ -59,7 +59,7 @@ function displayCurrentWeather(data) {
     city.innerHTML = cityName;
 
     const temp = document.createElement('h2');
-    temp.innerHTML = `${temperature}°C`;
+    temp.innerHTML = `${temperature}°F`;
 
     const additionalInfo = document.createElement('p');
     additionalInfo.innerHTML = description;
