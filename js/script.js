@@ -6,16 +6,10 @@ searchBtn.addEventListener('click',event => {
     event.preventDefault();
     getCurrentWeather();
     getForecast();
-    
-    const input = document.getElementById('recents').value;
-    const inputString = JSON.stringify(input);
-    localStorage.setItem('recent', inputString);
-    console.log(input)
-    showRecents();
 });
 
 function showRecents(){
-    const storedItem = localStorage.getItem('recent')
+    const storedItem = JSON.parse(localStorage.getItem('recent'));
     console.log(storedItem)
 };
 
@@ -35,6 +29,10 @@ function getCurrentWeather () {
        .catch(error => {
           alert('Error recieving current weather data. Please try again.')
        });
+
+       const cityInput = document.getElementById('recents').value;
+       localStorage.setItem('recent', JSON.stringify(input));
+       showRecents();
     
 }
 
