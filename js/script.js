@@ -19,7 +19,7 @@ function getCurrentWeather () {
     fetch(weatherApiUrl)
        .then(response => response.json())
        .then(data => {
-        displayCurrentWeather.innerHTML = '';
+        // displayCurrentWeather.innerHTML = '';
          displayCurrentWeather(data);
        }) //show eror if data not received correctly
        .catch(error => {
@@ -38,13 +38,13 @@ function storeRecents(){
     const input = document.getElementById('cityInput').value;
     const city = document.getElementById('recents')
     recentSearch.push(storedItem)
-
-    let addCity = document.createElement('li')
-    // addCity.textContent = storedItem;
-   
+    
+//create button and attach link when clicked
+    let addCity = document.createElement('button')
     const weatherLink = document.createElement('a')
     weatherLink.href = ``
     weatherLink.textContent = storedItem
+    weatherLink.classList.add(`recentcities`)
 
     addCity.appendChild(weatherLink);
     city.appendChild(addCity);
