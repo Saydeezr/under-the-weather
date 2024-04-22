@@ -1,6 +1,6 @@
 const searchBtn = document.getElementById('searchBtn');
 const weatherApiKey = '223145bd460816c9dd292b66ab0ede94';
-
+const recentSearch = [];
 
 searchBtn.addEventListener('click',event => {
     event.preventDefault();
@@ -8,10 +8,19 @@ searchBtn.addEventListener('click',event => {
     getForecast();
 });
 
-function showRecents(){
+function storeRecents(){
     const storedItem = JSON.parse(localStorage.getItem('recent'));
-    console.log(storedItem)
+    console.log('storedItem', storedItem)
+
+    const city = document.getElementById('recents')
+    recentSearch.push(storedItem)
+
+    let addCity = document.createElement('li')
+    addCity.textContent = storedItem;
+
+    city.appendChild(addCity);
 };
+
 
 function getCurrentWeather () {
     const input = document.getElementById('cityInput').value;
@@ -30,9 +39,9 @@ function getCurrentWeather () {
           alert('Error recieving current weather data. Please try again.')
        });
 
-       const cityInput = document.getElementById('recents').value;
        localStorage.setItem('recent', JSON.stringify(input));
-       showRecents();
+       recentSearch.push(input)
+       storeRecents();
     
 }
 
