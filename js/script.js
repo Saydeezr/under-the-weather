@@ -1,5 +1,5 @@
 const searchBtn = document.getElementById('searchBtn');
-const weatherApiKey = '223145bd460816c9dd292b66ab0ede94';
+const weatherApiKey = '761cd3c2f9eb022af715ad170027732f';
 const recentSearch = [];
 
 searchBtn.addEventListener('click',event => {
@@ -11,11 +11,12 @@ searchBtn.addEventListener('click',event => {
 function getCurrentWeather () {
     const input = document.getElementById('cityInput').value;
     const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}&units=imperial` 
-    
     if(!input) {
         alert('Please enter a city')
         return;
-    }
+    } 
+    
+    input.value = ''
     fetch(weatherApiUrl)
        .then(response => response.json())
        .then(data => {
@@ -25,14 +26,14 @@ function getCurrentWeather () {
           alert('Error recieving current weather data. Please try again.')
        });
 
-       localStorage.setItem('recent', JSON.stringify(input));
+       localStorage.setItem('cityName', JSON.stringify(input));
        recentSearch.push(input)
        storeRecents();
 }
 
 
 function storeRecents(){
-    const storedItem = JSON.parse(localStorage.getItem('recent'));
+    const storedItem = JSON.parse(localStorage.getItem('cityName'));
     console.log('storedItem', storedItem)
     const input = document.getElementById('cityInput').value;
     const city = document.getElementById('recents')
@@ -42,7 +43,7 @@ function storeRecents(){
     // addCity.textContent = storedItem;
    
     const weatherLink = document.createElement('a')
-    weatherLink.href = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}&units=imperial`
+    weatherLink.href = ``
     weatherLink.textContent = storedItem
 
     addCity.appendChild(weatherLink);
@@ -127,6 +128,7 @@ function displayDailyForecast(forecastData){
         forecastContainer.appendChild(newContainer);
     }
 }
+
 
 
 
