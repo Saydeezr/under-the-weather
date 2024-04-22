@@ -15,25 +15,25 @@ function getCurrentWeather () {
         alert('Please enter a city')
         return;
     } 
-    
-    input.value = ''
+    //get current weather data from API
     fetch(weatherApiUrl)
        .then(response => response.json())
        .then(data => {
+        displayCurrentWeather.innerHTML = '';
          displayCurrentWeather(data);
-       })
+       }) //show eror if data not received correctly
        .catch(error => {
           alert('Error recieving current weather data. Please try again.')
        });
-
-       localStorage.setItem('cityName', JSON.stringify(input));
+      //set given data to save in local storage
+       localStorage.setItem('recentCity', JSON.stringify(input));
        recentSearch.push(input)
        storeRecents();
 }
 
-
+//
 function storeRecents(){
-    const storedItem = JSON.parse(localStorage.getItem('cityName'));
+    const storedItem = JSON.parse(localStorage.getItem('recentCity'));
     console.log('storedItem', storedItem)
     const input = document.getElementById('cityInput').value;
     const city = document.getElementById('recents')
