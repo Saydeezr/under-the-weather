@@ -8,20 +8,6 @@ searchBtn.addEventListener('click',event => {
     getForecast();
 });
 
-function storeRecents(){
-    const storedItem = JSON.parse(localStorage.getItem('recent'));
-    console.log('storedItem', storedItem)
-
-    const city = document.getElementById('recents')
-    recentSearch.push(storedItem)
-
-    let addCity = document.createElement('li')
-    addCity.textContent = storedItem;
-
-    city.appendChild(addCity);
-};
-
-
 function getCurrentWeather () {
     const input = document.getElementById('cityInput').value;
     const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}&units=imperial` 
@@ -42,8 +28,27 @@ function getCurrentWeather () {
        localStorage.setItem('recent', JSON.stringify(input));
        recentSearch.push(input)
        storeRecents();
-    
 }
+
+
+function storeRecents(){
+    const storedItem = JSON.parse(localStorage.getItem('recent'));
+    console.log('storedItem', storedItem)
+    const input = document.getElementById('cityInput').value;
+    const city = document.getElementById('recents')
+    recentSearch.push(storedItem)
+
+    let addCity = document.createElement('li')
+    // addCity.textContent = storedItem;
+   
+    const weatherLink = document.createElement('a')
+    weatherLink.href = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}&units=imperial`
+    weatherLink.textContent = storedItem
+
+    addCity.appendChild(weatherLink);
+    city.appendChild(addCity);
+};
+
 
 function getForecast(){
     const input = document.getElementById('cityInput').value;
@@ -84,7 +89,6 @@ function displayCurrentWeather(data) {
     newContainer.appendChild(additionalInfo)
     body.appendChild(newContainer);
 };
-
 
 
 function displayDailyForecast(forecastData){
