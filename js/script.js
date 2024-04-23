@@ -8,8 +8,8 @@ searchBtn.addEventListener('click',event => {
     getForecast();
 });
 
-function getCurrentWeather () {
-    const input = document.getElementById('cityInput').value;
+function getCurrentWeather (prev) {
+    const input = prev || document.getElementById('cityInput').value;
     const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${weatherApiKey}&units=imperial` 
     if(!input) {
         alert('Please enter a city')
@@ -31,7 +31,6 @@ function getCurrentWeather () {
        storeRecents();
 }
 
-//
 function storeRecents(){
     const storedItem = JSON.parse(localStorage.getItem('recentCity'));
     console.log('storedItem', storedItem)
@@ -39,20 +38,29 @@ function storeRecents(){
     const city = document.getElementById('recents')
     recentSearch.push(storedItem)
     
-//create button and attach link when clicked
+//create button and 
     let addCity = document.createElement('button')
-    const weatherLink = document.createElement('a')
-    weatherLink.href = ``
-    weatherLink.textContent = storedItem
-    weatherLink.classList.add(`recentcities`)
+    addCity.classList.add('history')
+    addCity.addEventListener('click', function(event){
+        getCurrentWeather(event.target.innerText);
+        getForecast(event.target.innerText);
+    })
 
-    addCity.appendChild(weatherLink);
+    addCity.textContent = storedItem
+    const buttons = document.querySelectorAll('.history')
+    for (let i=0; i<buttons.length; i++){
+        let button = buttons[i]
+        if(button.innerText === storedItem){
+            return;
+        }
+    }
+    // addCity.appendChild(weatherLink);
     city.appendChild(addCity);
 };
 
 
-function getForecast(){
-    const input = document.getElementById('cityInput').value;
+function getForecast(prev){
+    const input = prev || document.getElementById('cityInput').value;
     const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&appid=${weatherApiKey}&units=imperial`
 
     fetch(forecastUrl)
@@ -72,7 +80,7 @@ function displayCurrentWeather(data) {
     const description = data.weather[0].description;
     const cityName = data.name;
     const body = document.querySelector('.header')
-
+    body.innerHTML = '';
     const newContainer = document.createElement('div')
     newContainer.classList.add('forecast')
 
